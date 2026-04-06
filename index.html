@@ -10,7 +10,7 @@
 
   body {
     background: #ffffff;
-    color: #1a1a1a;
+    color: #000000;
     font-family: 'DM Mono', monospace;
     min-height: 100vh;
     overflow-x: hidden;
@@ -29,24 +29,20 @@
     overflow: hidden;
   }
 
-  .hero-deco {
-    position: absolute;
-    border-radius: 50%;
-    opacity: 0.22;
-  }
-  .deco1 { width: 420px; height: 420px; background: #c8f230; top: -80px; left: -120px; }
-  .deco2 { width: 280px; height: 280px; background: #c0c0c0; bottom: 20px; right: -60px; }
-  .deco3 { width: 120px; height: 120px; background: #a8e000; top: 60px; right: 100px; }
+  .hero-deco { position: absolute; border-radius: 0; opacity: 0.28; }
+  .deco1 { width: 380px; height: 380px; background: #aaff00; top: -100px; left: -100px; transform: rotate(18deg); }
+  .deco2 { width: 240px; height: 240px; background: #c0c0c0; bottom: -40px; right: -60px; transform: rotate(12deg); }
+  .deco3 { width: 110px; height: 110px; background: #aaff00; top: 80px; right: 120px; transform: rotate(30deg); }
 
   .badge {
     font-family: 'DM Mono', monospace;
     font-size: 10px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    background: #1a1a1a;
-    color: #c8f230;
+    background: #000000;
+    color: #aaff00;
     padding: 5px 14px;
-    border-radius: 20px;
+    border-radius: 0;
     display: inline-block;
     margin-bottom: 2rem;
   }
@@ -56,7 +52,7 @@
     font-size: clamp(5rem, 20vw, 10rem);
     font-weight: 700;
     line-height: 0.9;
-    color: #1a1a1a;
+    color: #000000;
     letter-spacing: -0.02em;
     margin-bottom: 1.5rem;
   }
@@ -64,7 +60,7 @@
   .hero-tagline {
     font-size: 13px;
     letter-spacing: 0.06em;
-    color: #707070;
+    color: #444444;
     max-width: 340px;
     line-height: 1.9;
   }
@@ -77,7 +73,7 @@
     font-size: 10px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: #a0a0a0;
+    color: #888888;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -86,7 +82,7 @@
   .scroll-line {
     width: 1px;
     height: 32px;
-    background: #c8f230;
+    background: #aaff00;
     animation: scrollpulse 1.6s ease-in-out infinite;
   }
   @keyframes scrollpulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
@@ -101,11 +97,18 @@
     font-size: 10px;
     letter-spacing: 0.3em;
     text-transform: uppercase;
-    color: #a0a0a0;
+    color: #888888;
     margin-bottom: 2.5rem;
     display: flex;
     align-items: center;
     gap: 12px;
+  }
+  .section-label::before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background: #aaff00;
+    flex-shrink: 0;
   }
   .section-label::after {
     content: '';
@@ -114,45 +117,28 @@
     background: #e0e0e0;
   }
 
+  /* FACTS */
   .facts-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1px;
     background: #d8d8d8;
     border: 1px solid #d8d8d8;
-    border-radius: 16px;
     overflow: hidden;
   }
-
-  .fact-card {
-    background: #ffffff;
-    padding: 2rem 1.75rem;
-  }
-
+  .fact-card { background: #ffffff; padding: 2rem 1.75rem; }
   .fact-num {
     font-family: 'Playfair Display', serif;
     font-size: 3rem;
     font-weight: 700;
-    color: #c8f230;
+    color: #aaff00;
     line-height: 1;
     margin-bottom: 0.5rem;
   }
+  .fact-text { font-size: 13px; line-height: 1.8; color: #000000; }
 
-  .fact-text {
-    font-size: 13px;
-    line-height: 1.8;
-    color: #3a3a3a;
-  }
-
-  .hobby-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    border: 1px solid #d8d8d8;
-    border-radius: 16px;
-    overflow: hidden;
-  }
-
+  /* HOBBIES */
+  .hobby-list { display: flex; flex-direction: column; border: 1px solid #d8d8d8; overflow: hidden; }
   .hobby-row {
     display: flex;
     align-items: center;
@@ -164,136 +150,253 @@
   }
   .hobby-row:last-child { border-bottom: none; }
   .hobby-row:hover { background: #f5ffe0; }
-
   .hobby-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    background: #c8f230;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    font-size: 18px;
+    width: 40px; height: 40px;
+    background: #aaff00;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; font-size: 18px;
   }
-
   .hobby-name {
     font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
-    font-weight: 400;
-    font-style: italic;
-    color: #1a1a1a;
+    font-size: 1.1rem; font-style: italic; color: #000000;
   }
+  .hobby-desc { font-size: 11px; color: #888888; letter-spacing: 0.05em; margin-left: auto; text-align: right; }
 
-  .hobby-desc {
-    font-size: 11px;
-    color: #a0a0a0;
-    letter-spacing: 0.05em;
-    margin-left: auto;
-    text-align: right;
-  }
-
-  .fav-cols {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-  }
-
+  /* FAVOURITES */
+  .fav-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
   .fav-col-head {
-    font-size: 10px;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: #a0a0a0;
-    margin-bottom: 1.2rem;
-    padding-bottom: 0.8rem;
-    border-bottom: 2px solid #c8f230;
+    font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase;
+    color: #888888; margin-bottom: 1.2rem; padding-bottom: 0.8rem;
+    border-bottom: 3px solid #aaff00;
   }
-
   .fav-item {
-    font-size: 13px;
-    color: #3a3a3a;
-    padding: 0.4rem 0;
-    line-height: 1.6;
+    font-size: 13px; color: #000000;
+    padding: 0.4rem 0; line-height: 1.6;
     border-bottom: 1px dashed #e8e8e8;
   }
   .fav-item:last-child { border-bottom: none; }
 
+  /* ISTJ */
+  .istj-wrap { border: 1px solid #d8d8d8; overflow: hidden; }
+  .istj-header {
+    background: #000000;
+    padding: 2rem 2.5rem;
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+  }
+  .istj-type {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #aaff00;
+    line-height: 1;
+  }
+  .istj-full {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #c0c0c0;
+  }
+  .istj-body { padding: 2rem 2.5rem; background: #ffffff; }
+  .istj-traits {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: #e8e8e8;
+    border: 1px solid #e8e8e8;
+    margin-bottom: 1.5rem;
+  }
+  .istj-trait { background: #ffffff; padding: 1rem 1.25rem; }
+  .istj-trait-label {
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #aaff00;
+    margin-bottom: 4px;
+  }
+  .istj-trait-val { font-size: 13px; color: #000000; line-height: 1.6; }
+  .istj-desc {
+    font-size: 13px;
+    line-height: 2;
+    color: #000000;
+    border-left: 3px solid #aaff00;
+    padding-left: 1.25rem;
+  }
+
+  /* YOUTUBE */
+  .yt-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: #d8d8d8;
+    border: 1px solid #d8d8d8;
+    overflow: hidden;
+  }
+  .yt-card {
+    background: #ffffff;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .yt-card:hover { background: #f5ffe0; }
+  .yt-thumb {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border-bottom: 1px solid #e8e8e8;
+  }
+  .yt-play {
+    width: 36px; height: 36px;
+    background: #aaff00;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .yt-play-tri {
+    width: 0; height: 0;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 14px solid #000000;
+    margin-left: 3px;
+  }
+  .yt-thumb-label {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #bbbbbb;
+  }
+  .yt-info { padding: 1rem 1.25rem; }
+  .yt-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 0.9rem;
+    font-style: italic;
+    color: #000000;
+    margin-bottom: 4px;
+    line-height: 1.4;
+  }
+  .yt-url { font-size: 10px; color: #bbbbbb; letter-spacing: 0.05em; word-break: break-all; }
+
+  /* IMAGES */
+  .img-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: #d8d8d8;
+    border: 1px solid #d8d8d8;
+    overflow: hidden;
+  }
+  .img-slot {
+    background: #f8f8f8;
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .img-slot:hover { background: #f0ffe0; }
+  .img-slot img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: none;
+  }
+  .img-slot.has-image img { display: block; }
+  .img-slot.has-image .img-placeholder { display: none; }
+  .img-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .img-plus {
+    width: 36px; height: 36px;
+    background: #aaff00;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    color: #000000;
+    font-weight: 300;
+    line-height: 1;
+  }
+  .img-label {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #bbbbbb;
+  }
+  .img-input { display: none; }
+
+  /* TRAVEL */
   .travel-card {
-    background: #1a1a1a;
+    background: #000000;
     color: #ffffff;
-    border-radius: 20px;
     padding: 3rem 2.5rem;
     display: flex;
     align-items: center;
     gap: 3rem;
+    position: relative;
+    overflow: hidden;
   }
-
-  .travel-big {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(3rem, 8vw, 5rem);
-    font-weight: 700;
-    line-height: 1;
-    flex-shrink: 0;
-    color: #c8f230;
+  .travel-card::before {
+    content: '';
+    position: absolute;
+    width: 180px; height: 180px;
+    background: #aaff00;
+    opacity: 0.08;
+    right: -40px; top: -40px;
+    transform: rotate(20deg);
   }
-
+  .travel-big { font-size: clamp(3rem, 8vw, 5rem); line-height: 1; flex-shrink: 0; }
   .travel-place {
     font-family: 'Playfair Display', serif;
-    font-size: 1.4rem;
-    font-style: italic;
-    color: #ffffff;
-    margin-bottom: 0.5rem;
+    font-size: 1.4rem; font-style: italic;
+    color: #ffffff; margin-bottom: 0.5rem;
   }
+  .travel-text { font-size: 13px; line-height: 2; color: #c0c0c0; }
 
-  .travel-text {
-    font-size: 13px;
-    line-height: 2;
-    color: #c0c0c0;
-  }
-
+  /* FOOTER */
   footer {
     text-align: center;
     padding: 4rem 2rem;
-    border-top: 1px solid #e0e0e0;
-    background: #f8fff0;
+    border-top: 4px solid #aaff00;
+    background: #ffffff;
   }
-
   footer .big-hi {
     font-family: 'Playfair Display', serif;
     font-size: clamp(3rem, 10vw, 6rem);
-    font-weight: 700;
-    font-style: italic;
-    color: #1a1a1a;
+    font-weight: 700; font-style: italic; color: #000000;
   }
-
   footer .sub {
-    font-size: 11px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: #a0a0a0;
-    margin-top: 1rem;
+    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: #888888; margin-top: 1rem;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
   }
-
-  footer .dot {
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #c8f230;
-    margin: 0 6px;
-    vertical-align: middle;
-  }
+  footer .dot { display: inline-block; width: 8px; height: 8px; background: #aaff00; }
 
   @media (max-width: 600px) {
-    .facts-grid { grid-template-columns: 1fr; }
+    .facts-grid, .yt-grid, .img-grid { grid-template-columns: 1fr; }
     .fav-cols { grid-template-columns: 1fr; }
     .travel-card { flex-direction: column; gap: 1.5rem; }
     .hobby-desc { display: none; }
+    .istj-traits { grid-template-columns: 1fr; }
   }
 </style>
 </head>
 <body>
 
+<!-- HERO -->
 <div class="hero">
   <div class="hero-deco deco1"></div>
   <div class="hero-deco deco2"></div>
@@ -307,6 +410,7 @@
   </div>
 </div>
 
+<!-- FUN FACTS -->
 <section>
   <div class="section-label">Fun facts</div>
   <div class="facts-grid">
@@ -325,6 +429,7 @@
   </div>
 </section>
 
+<!-- HOBBIES -->
 <section style="padding-top: 0;">
   <div class="section-label">Things I do</div>
   <div class="hobby-list">
@@ -346,6 +451,7 @@
   </div>
 </section>
 
+<!-- FAVOURITES -->
 <section style="padding-top: 0;">
   <div class="section-label">A few favourites</div>
   <div class="fav-cols">
@@ -365,11 +471,114 @@
     <div>
       <div class="fav-col-head">Reading</div>
       <div class="fav-item">Emily Dickinson poems</div>
-      <div class="fav-item" style="color: #a0a0a0; font-style: italic;">Because I could not stop for death...</div>
+      <div class="fav-item" style="color: #888888; font-style: italic;">Because I could not stop for death...</div>
     </div>
   </div>
 </section>
 
+<!-- PERSONALITY -->
+<section style="padding-top: 0;">
+  <div class="section-label">Personality</div>
+  <div class="istj-wrap">
+    <div class="istj-header">
+      <div class="istj-type">ISTJ</div>
+      <div class="istj-full">Introverted · Sensing · Thinking · Judging</div>
+    </div>
+    <div class="istj-body">
+      <div class="istj-traits">
+        <div class="istj-trait">
+          <div class="istj-trait-label">Also known as</div>
+          <div class="istj-trait-val">The Inspector</div>
+        </div>
+        <div class="istj-trait">
+          <div class="istj-trait-label">Core drive</div>
+          <div class="istj-trait-val">Order, accuracy, reliability</div>
+        </div>
+        <div class="istj-trait">
+          <div class="istj-trait-label">Strengths</div>
+          <div class="istj-trait-val">Dependable, thorough, observant</div>
+        </div>
+        <div class="istj-trait">
+          <div class="istj-trait-label">Recharges by</div>
+          <div class="istj-trait-val">Solitude, routines, a good plan</div>
+        </div>
+      </div>
+      <div class="istj-desc">
+        Quietly competent and privately opinionated. Follows through on everything, notices everything, says little. Prefers one good friend to a room full of acquaintances. Has strong feelings about how things should be done — and is usually right about it.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- YOUTUBE -->
+<section style="padding-top: 0;">
+  <div class="section-label">Videos of interest</div>
+  <div class="yt-grid">
+    <a class="yt-card" href="YOUR_YOUTUBE_URL_1" target="_blank">
+      <div class="yt-thumb">
+        <div class="yt-play"><div class="yt-play-tri"></div></div>
+        <div class="yt-thumb-label">Add video URL</div>
+      </div>
+      <div class="yt-info">
+        <div class="yt-title">Video title here</div>
+        <div class="yt-url">youtube.com/watch?v=...</div>
+      </div>
+    </a>
+    <a class="yt-card" href="YOUR_YOUTUBE_URL_2" target="_blank">
+      <div class="yt-thumb">
+        <div class="yt-play"><div class="yt-play-tri"></div></div>
+        <div class="yt-thumb-label">Add video URL</div>
+      </div>
+      <div class="yt-info">
+        <div class="yt-title">Video title here</div>
+        <div class="yt-url">youtube.com/watch?v=...</div>
+      </div>
+    </a>
+    <a class="yt-card" href="YOUR_YOUTUBE_URL_3" target="_blank">
+      <div class="yt-thumb">
+        <div class="yt-play"><div class="yt-play-tri"></div></div>
+        <div class="yt-thumb-label">Add video URL</div>
+      </div>
+      <div class="yt-info">
+        <div class="yt-title">Video title here</div>
+        <div class="yt-url">youtube.com/watch?v=...</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- IMAGES -->
+<section style="padding-top: 0;">
+  <div class="section-label">Photos</div>
+  <div class="img-grid">
+    <div class="img-slot" onclick="document.getElementById('upload1').click()">
+      <input class="img-input" type="file" id="upload1" accept="image/*" onchange="loadImage(this,'slot1')">
+      <img id="slot1" src="" alt="">
+      <div class="img-placeholder">
+        <div class="img-plus">+</div>
+        <div class="img-label">Upload image</div>
+      </div>
+    </div>
+    <div class="img-slot" onclick="document.getElementById('upload2').click()">
+      <input class="img-input" type="file" id="upload2" accept="image/*" onchange="loadImage(this,'slot2')">
+      <img id="slot2" src="" alt="">
+      <div class="img-placeholder">
+        <div class="img-plus">+</div>
+        <div class="img-label">Upload image</div>
+      </div>
+    </div>
+    <div class="img-slot" onclick="document.getElementById('upload3').click()">
+      <input class="img-input" type="file" id="upload3" accept="image/*" onchange="loadImage(this,'slot3')">
+      <img id="slot3" src="" alt="">
+      <div class="img-placeholder">
+        <div class="img-plus">+</div>
+        <div class="img-label">Upload image</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRAVEL -->
 <section style="padding-top: 0;">
   <div class="section-label">Places</div>
   <div class="travel-card">
@@ -381,10 +590,25 @@
   </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
   <div class="big-hi">Hi.</div>
-  <p class="sub">That's all. That's the website.<span class="dot"></span>ELR</p>
+  <p class="sub"><span class="dot"></span>That's all. That's the website. ELR<span class="dot"></span></p>
 </footer>
+
+<script>
+function loadImage(input, imgId) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const img = document.getElementById(imgId);
+    img.src = e.target.result;
+    img.parentElement.classList.add('has-image');
+  };
+  reader.readAsDataURL(file);
+}
+</script>
 
 </body>
 </html>
