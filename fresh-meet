@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ELR</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #ffffff;
+    color: #1a1a1a;
+    font-family: 'DM Mono', monospace;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3rem 2rem;
+    position: relative;
+    background: #ffffff;
+    overflow: hidden;
+  }
+
+  .hero-deco {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.22;
+  }
+  .deco1 { width: 420px; height: 420px; background: #c8f230; top: -80px; left: -120px; }
+  .deco2 { width: 280px; height: 280px; background: #c0c0c0; bottom: 20px; right: -60px; }
+  .deco3 { width: 120px; height: 120px; background: #a8e000; top: 60px; right: 100px; }
+
+  .badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    background: #1a1a1a;
+    color: #c8f230;
+    padding: 5px 14px;
+    border-radius: 20px;
+    display: inline-block;
+    margin-bottom: 2rem;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(5rem, 20vw, 10rem);
+    font-weight: 700;
+    line-height: 0.9;
+    color: #1a1a1a;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-tagline {
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    color: #707070;
+    max-width: 340px;
+    line-height: 1.9;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #a0a0a0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .scroll-line {
+    width: 1px;
+    height: 32px;
+    background: #c8f230;
+    animation: scrollpulse 1.6s ease-in-out infinite;
+  }
+  @keyframes scrollpulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+  section {
+    padding: 5rem 2rem;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #a0a0a0;
+    margin-bottom: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #e0e0e0;
+  }
+
+  .facts-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: #d8d8d8;
+    border: 1px solid #d8d8d8;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .fact-card {
+    background: #ffffff;
+    padding: 2rem 1.75rem;
+  }
+
+  .fact-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #c8f230;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .fact-text {
+    font-size: 13px;
+    line-height: 1.8;
+    color: #3a3a3a;
+  }
+
+  .hobby-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid #d8d8d8;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .hobby-row {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid #e8e8e8;
+    background: #ffffff;
+    transition: background 0.2s;
+  }
+  .hobby-row:last-child { border-bottom: none; }
+  .hobby-row:hover { background: #f5ffe0; }
+
+  .hobby-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: #c8f230;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 18px;
+  }
+
+  .hobby-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    font-style: italic;
+    color: #1a1a1a;
+  }
+
+  .hobby-desc {
+    font-size: 11px;
+    color: #a0a0a0;
+    letter-spacing: 0.05em;
+    margin-left: auto;
+    text-align: right;
+  }
+
+  .fav-cols {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .fav-col-head {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #a0a0a0;
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 2px solid #c8f230;
+  }
+
+  .fav-item {
+    font-size: 13px;
+    color: #3a3a3a;
+    padding: 0.4rem 0;
+    line-height: 1.6;
+    border-bottom: 1px dashed #e8e8e8;
+  }
+  .fav-item:last-child { border-bottom: none; }
+
+  .travel-card {
+    background: #1a1a1a;
+    color: #ffffff;
+    border-radius: 20px;
+    padding: 3rem 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+  }
+
+  .travel-big {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 8vw, 5rem);
+    font-weight: 700;
+    line-height: 1;
+    flex-shrink: 0;
+    color: #c8f230;
+  }
+
+  .travel-place {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+  }
+
+  .travel-text {
+    font-size: 13px;
+    line-height: 2;
+    color: #c0c0c0;
+  }
+
+  footer {
+    text-align: center;
+    padding: 4rem 2rem;
+    border-top: 1px solid #e0e0e0;
+    background: #f8fff0;
+  }
+
+  footer .big-hi {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 10vw, 6rem);
+    font-weight: 700;
+    font-style: italic;
+    color: #1a1a1a;
+  }
+
+  footer .sub {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #a0a0a0;
+    margin-top: 1rem;
+  }
+
+  footer .dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #c8f230;
+    margin: 0 6px;
+    vertical-align: middle;
+  }
+
+  @media (max-width: 600px) {
+    .facts-grid { grid-template-columns: 1fr; }
+    .fav-cols { grid-template-columns: 1fr; }
+    .travel-card { flex-direction: column; gap: 1.5rem; }
+    .hobby-desc { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-deco deco1"></div>
+  <div class="hero-deco deco2"></div>
+  <div class="hero-deco deco3"></div>
+  <div class="badge">Definitely South African</div>
+  <h1>ELR</h1>
+  <p class="hero-tagline">Not extroverted. Here to say hi. Knows where the clues are.</p>
+  <div class="scroll-hint">
+    <span>scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</div>
+
+<section>
+  <div class="section-label">Fun facts</div>
+  <div class="facts-grid">
+    <div class="fact-card">
+      <div class="fact-num">01</div>
+      <div class="fact-text">Has been on first dates. Plural. The data collection continues.</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-num">02</div>
+      <div class="fact-text">The birthmark grows back. Every time. Make of that what you will.</div>
+    </div>
+    <div class="fact-card" style="grid-column: 1 / -1; border-top: 1px solid #d8d8d8;">
+      <div class="fact-num">03</div>
+      <div class="fact-text">Keeps a mental file on everyone she's ever met. Organised by suspicion level.</div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top: 0;">
+  <div class="section-label">Things I do</div>
+  <div class="hobby-list">
+    <div class="hobby-row">
+      <div class="hobby-icon">🔍</div>
+      <div class="hobby-name">Being Nancy Drew</div>
+      <div class="hobby-desc">amateur sleuth &amp; enjoyer of clues</div>
+    </div>
+    <div class="hobby-row">
+      <div class="hobby-icon">💃</div>
+      <div class="hobby-name">Dancing</div>
+      <div class="hobby-desc">in living rooms, mostly</div>
+    </div>
+    <div class="hobby-row">
+      <div class="hobby-icon">📋</div>
+      <div class="hobby-name">The rules</div>
+      <div class="hobby-desc">knows them, possibly enforces them</div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top: 0;">
+  <div class="section-label">A few favourites</div>
+  <div class="fav-cols">
+    <div>
+      <div class="fav-col-head">Music</div>
+      <div class="fav-item">Enya</div>
+      <div class="fav-item">Robyn</div>
+      <div class="fav-item">No Doubt</div>
+    </div>
+    <div>
+      <div class="fav-col-head">Screen</div>
+      <div class="fav-item">The Virgin Suicides</div>
+      <div class="fav-item">Midsomer Murders</div>
+      <div class="fav-item">Twin Peaks</div>
+      <div class="fav-item">Parks &amp; Rec</div>
+    </div>
+    <div>
+      <div class="fav-col-head">Reading</div>
+      <div class="fav-item">Emily Dickinson poems</div>
+      <div class="fav-item" style="color: #a0a0a0; font-style: italic;">Because I could not stop for death...</div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top: 0;">
+  <div class="section-label">Places</div>
+  <div class="travel-card">
+    <div class="travel-big">🍜</div>
+    <div>
+      <div class="travel-place">Cup Noodle Museum</div>
+      <div class="travel-text">Dream destination. A whole museum dedicated to instant noodles. Aspirational. Correct.</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="big-hi">Hi.</div>
+  <p class="sub">That's all. That's the website.<span class="dot"></span>ELR</p>
+</footer>
+
+</body>
+</html>
