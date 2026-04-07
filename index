@@ -342,7 +342,7 @@ footer .dot{display:inline-block;width:8px;height:8px;background:var(--lime);}
   </div>
 </div>
 <footer>
-  <div class="big">Thanks bye.</div>
+  <div class="big">That's all.</div>
   <p class="sub"><span class="dot"></span>That’s all. That’s the website. ELR<span class="dot"></span></p>
 </footer>
 
