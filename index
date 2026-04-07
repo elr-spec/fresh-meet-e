@@ -139,7 +139,7 @@ footer .dot{display:inline-block;width:8px;height:8px;background:var(--lime);}
   <div class="masthead-center">
     <div class="masthead-sub">Fresh Meat</div>
     <div class="masthead-title">ELR</div>
-    <div class="masthead-date">Wed 1 April 2026</div>
+    <div class="masthead-date">Wed 8 April 2026</div>
   </div>
   <div class="masthead-img" onclick="document.getElementById('mh-upload2').click()">
     <input class="img-input" type="file" id="mh-upload2" accept="image/*" onchange="loadImg(this,'mh-img2',this.closest('.masthead-img'))">
@@ -312,7 +312,7 @@ footer .dot{display:inline-block;width:8px;height:8px;background:var(--lime);}
 <div class="banner"><div class="banner-text">The cup noodle museum (Yokohama, Japan)</div></div>
 <div class="noodle-banner">
   <div class="noodle-emoji">🍜</div>
-  <div><div class="noodle-title">One of my greatest life experiences.</div><div class="noodle-sub">Finally.</div></div>
+  <div><div class="noodle-title">One of my greatest life experiences.</div><div class="noodle-sub">Truly.</div></div>
 </div>
 <div class="content">
   <h2>What’s it about?</h2>
