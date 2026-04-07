@@ -8,91 +8,45 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --lime:#aaff00;
-  --black:#000000;
-  --white:#ffffff;
-  --gray:#c0c0c0;
-  --gray-light:#e8e8e8;
-  --gray-mid:#888888;
-  --gray-dark:#333333;
-  --text:#000000;
-  --mono:'DM Mono',monospace;
-  --serif:'Playfair Display',serif;
+  --lime:#8fd400;--black:#000000;--white:#ffffff;--gray:#c0c0c0;
+  --gray-light:#e8e8e8;--gray-mid:#888888;
+  --mono:'DM Mono',monospace;--serif:'Playfair Display',serif;
 }
 html{scroll-behavior:smooth;}
-body{background:var(--white);color:var(--text);font-family:var(--mono);overflow-x:hidden;}
-
+body{background:var(--white);color:var(--black);font-family:var(--mono);overflow-x:hidden;}
 .label{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gray-mid);}
-
-/* ── MASTHEAD ── */
-.masthead{
-  display:grid;
-  grid-template-columns:1fr auto 1fr;
-  align-items:center;
-  border-bottom:3px solid var(--black);
-  background:var(--white);
-}
-.masthead-img{
-  aspect-ratio:1;
-  max-height:220px;
-  background:#f0f0f0;
-  border-right:2px solid var(--black);
-  display:flex;align-items:center;justify-content:center;
-  flex-direction:column;gap:8px;cursor:pointer;
-  position:relative;overflow:hidden;transition:background .2s;
-}
+.masthead{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;border-bottom:3px solid var(--black);background:var(--white);}
+.masthead-img{aspect-ratio:1;max-height:220px;background:#f0f0f0;border-right:2px solid var(--black);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:8px;cursor:pointer;position:relative;overflow:hidden;transition:background .2s;}
 .masthead-img:last-child{border-right:none;border-left:2px solid var(--black);}
-.masthead-img:hover{background:#f5ffe0;}
+.masthead-img:hover{background:#f3ffe0;}
 .masthead-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;}
 .masthead-img.has-image img{display:block;}
 .masthead-img.has-image .img-placeholder{display:none;}
 .img-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;}
-.img-plus{width:32px;height:32px;background:var(--lime);display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--black);}
+.img-plus{width:32px;height:32px;background:var(--lime);display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--white);}
 .img-input{display:none;}
-
 .masthead-center{text-align:center;padding:2rem 2.5rem;}
 .masthead-sub{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gray-mid);margin-bottom:.5rem;}
 .masthead-title{font-family:var(--serif);font-size:clamp(4rem,12vw,7rem);font-weight:700;line-height:.9;color:var(--black);letter-spacing:-.02em;}
 .masthead-date{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gray-mid);margin-top:.75rem;}
-
-/* ── SECTION HEADER ── */
 .sec-head{border-top:2px solid var(--black);border-bottom:1px solid var(--gray-light);padding:.6rem 2rem;display:flex;align-items:center;gap:1rem;background:var(--black);}
 .sec-head span{font-size:12px;letter-spacing:.25em;text-transform:uppercase;color:var(--lime);}
-
-/* ── BANNER ── */
 .banner{background:var(--lime);padding:1.2rem 2rem;display:flex;align-items:center;gap:1rem;}
 .banner-text{font-family:var(--serif);font-size:clamp(1.4rem,4vw,2.2rem);font-weight:700;color:var(--black);line-height:1.1;}
 .banner-body{font-size:13px;line-height:1.9;color:var(--black);padding:1.5rem 2rem;max-width:860px;margin:0 auto;}
-
-/* ── CONTENT ── */
 .content{padding:2.5rem 2rem;max-width:860px;margin:0 auto;}
 .content h2{font-family:var(--serif);font-size:1.6rem;font-weight:700;color:var(--black);margin-bottom:1rem;}
 .content p{font-size:13px;line-height:2;color:var(--black);margin-bottom:1rem;}
-
-/* ── PLOTLY PLACEHOLDER ── */
-.plotly-slot{
-  border:2px dashed var(--gray-light);background:#fafafa;
-  min-height:260px;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;gap:10px;margin:1.5rem 0;
-}
+.plotly-slot{border:2px dashed var(--gray-light);background:#fafafa;min-height:260px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;margin:1.5rem 0;}
 .plotly-slot .ps-icon{width:40px;height:40px;background:var(--lime);display:flex;align-items:center;justify-content:center;}
 .plotly-slot .ps-label{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gray-mid);}
 .plotly-slot .ps-note{font-size:11px;color:#bbb;margin-top:4px;}
-
-/* ── TWO IMAGES ── */
-.two-images{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--gray-light);border:1px solid var(--gray-light);margin:1.5rem 0;}
-.two-images .img-slot{
-  aspect-ratio:4/3;background:#f8f8f8;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:8px;cursor:pointer;transition:background .2s;
-  position:relative;overflow:hidden;
-}
-.two-images .img-slot:hover{background:#f5ffe0;}
-.two-images .img-slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;}
-.two-images .img-slot.has-image img{display:block;}
-.two-images .img-slot.has-image .img-placeholder{display:none;}
-
-/* ── FAVOURITES ── */
+.single-image{border:1px solid var(--gray-light);margin:1.5rem 0;}
+.single-image .img-slot{aspect-ratio:16/7;background:#f8f8f8;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;cursor:pointer;transition:background .2s;position:relative;overflow:hidden;}
+.single-image .img-slot:hover{background:#f3ffe0;}
+.single-image .img-slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;}
+.single-image .img-slot.has-image img{display:block;}
+.single-image .img-slot.has-image .img-placeholder{display:none;}
 .favs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--gray-light);}
 .fav-col{border-right:1px solid var(--gray-light);padding:1.5rem;}
 .fav-col:last-child{border-right:none;}
@@ -100,51 +54,39 @@ body{background:var(--white);color:var(--text);font-family:var(--mono);overflow-
 .fav-item{font-size:12px;color:var(--black);padding:.35rem 0;border-bottom:1px dashed var(--gray-light);line-height:1.5;}
 .fav-item:last-child{border-bottom:none;}
 .fav-item.italic{font-style:italic;color:var(--gray-mid);}
-
-/* ── FAVE THINGS ── */
 .fave-things{border:1px solid var(--gray-light);overflow:hidden;margin:0;}
 .fave-row{display:flex;align-items:baseline;gap:1rem;padding:.85rem 1.5rem;border-bottom:1px solid var(--gray-light);font-size:13px;}
 .fave-row:last-child{border-bottom:none;}
 .fave-key{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--lime);min-width:180px;flex-shrink:0;}
 .fave-val{color:var(--black);line-height:1.6;}
-
-/* ── FUN FACTS ── */
 .facts-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--gray-light);border:1px solid var(--gray-light);}
 .fact-card{background:var(--white);padding:1.75rem;}
 .fact-num{font-family:var(--serif);font-size:2.5rem;font-weight:700;color:var(--lime);line-height:1;margin-bottom:.5rem;}
 .fact-text{font-size:13px;line-height:1.9;color:var(--black);}
-
-/* ── THREE THINGS ── */
 .three-things{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--gray-light);border:1px solid var(--gray-light);}
 .thing-card{background:var(--white);padding:1.75rem;}
 .thing-title{font-family:var(--serif);font-size:1.2rem;font-style:italic;color:var(--black);margin-bottom:.75rem;padding-bottom:.75rem;border-bottom:2px solid var(--lime);}
 .thing-body{font-size:12px;line-height:1.9;color:var(--black);}
 .thing-body li{list-style:none;padding:.2rem 0;}
 .thing-body li::before{content:'— ';color:var(--lime);}
-
-/* ── YT SLOTS ── */
 .yt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--gray-light);border:1px solid var(--gray-light);margin:1.5rem 0;}
 .yt-card{background:var(--white);display:flex;flex-direction:column;text-decoration:none;transition:background .2s;}
-.yt-card:hover{background:#f5ffe0;}
+.yt-card:hover{background:#f3ffe0;}
 .yt-thumb{aspect-ratio:16/9;background:#f0f0f0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border-bottom:1px solid var(--gray-light);}
 .yt-play{width:34px;height:34px;background:var(--lime);display:flex;align-items:center;justify-content:center;}
-.yt-tri{width:0;height:0;border-top:7px solid transparent;border-bottom:7px solid transparent;border-left:13px solid var(--black);margin-left:3px;}
+.yt-tri{width:0;height:0;border-top:7px solid transparent;border-bottom:7px solid transparent;border-left:13px solid var(--white);margin-left:3px;}
 .yt-thumb-lbl{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#bbb;}
 .yt-info{padding:.85rem 1rem;}
 .yt-title{font-family:var(--serif);font-size:.85rem;font-style:italic;color:var(--black);margin-bottom:3px;line-height:1.4;}
 .yt-url{font-size:10px;color:#bbb;word-break:break-all;}
-
-/* ── KPOP RULES ── */
 .kpop-rules{border:1px solid var(--gray-light);overflow:hidden;margin:1.5rem 0;}
 .kpop-rule{display:flex;gap:1.5rem;padding:1rem 1.5rem;border-bottom:1px solid var(--gray-light);align-items:flex-start;}
 .kpop-rule:last-child{border-bottom:none;}
-.kpop-rule:hover{background:#f5ffe0;}
+.kpop-rule:hover{background:#f3ffe0;}
 .kpop-n{font-family:var(--serif);font-size:1.6rem;font-weight:700;color:var(--lime);min-width:36px;line-height:1;}
 .kpop-text{font-size:13px;line-height:1.8;color:var(--black);}
-
-/* ── NOODLE ── */
 .noodle-banner{background:var(--black);padding:3rem 2rem;display:flex;align-items:center;gap:3rem;position:relative;overflow:hidden;}
-.noodle-banner::before{content:'';position:absolute;width:200px;height:200px;background:var(--lime);opacity:.07;right:-40px;top:-40px;transform:rotate(20deg);}
+.noodle-banner::before{content:'';position:absolute;width:200px;height:200px;background:var(--lime);opacity:.09;right:-40px;top:-40px;transform:rotate(20deg);}
 .noodle-emoji{font-size:clamp(3rem,8vw,5rem);flex-shrink:0;}
 .noodle-title{font-family:var(--serif);font-size:1.6rem;font-style:italic;color:var(--white);margin-bottom:.4rem;}
 .noodle-sub{font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--gray);}
@@ -153,13 +95,10 @@ body{background:var(--white);color:var(--text);font-family:var(--mono);overflow-
 .noodle-item:last-child{border-bottom:none;}
 .noodle-dot{width:10px;height:10px;background:var(--lime);flex-shrink:0;margin-top:5px;}
 .noodle-text{font-size:13px;line-height:1.8;color:var(--black);}
-
-/* ── FOOTER ── */
 footer{text-align:center;padding:4rem 2rem;border-top:4px solid var(--lime);}
 footer .big{font-family:var(--serif);font-size:clamp(3rem,10vw,6rem);font-weight:700;font-style:italic;color:var(--black);}
 footer .sub{font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--gray-mid);margin-top:1rem;display:flex;align-items:center;justify-content:center;gap:10px;}
 footer .dot{display:inline-block;width:8px;height:8px;background:var(--lime);}
-
 @media(max-width:640px){
   .masthead{grid-template-columns:1fr;}
   .masthead-img{max-height:160px;}
@@ -167,22 +106,18 @@ footer .dot{display:inline-block;width:8px;height:8px;background:var(--lime);}
   .favs-grid,.three-things,.facts-grid,.yt-grid{grid-template-columns:1fr;}
   .fav-col{border-right:none;border-bottom:1px solid var(--gray-light);}
   .noodle-banner{flex-direction:column;gap:1.5rem;}
-  .two-images{grid-template-columns:1fr;}
   .fave-key{min-width:120px;}
 }
 </style>
 </head>
 <body>
 
-<!-- ══ MASTHEAD ══ -->
+<!-- MASTHEAD -->
 <div class="masthead">
   <div class="masthead-img" onclick="document.getElementById('mh-upload1').click()">
     <input class="img-input" type="file" id="mh-upload1" accept="image/*" onchange="loadImg(this,'mh-img1',this.closest('.masthead-img'))">
     <img id="mh-img1" src="" alt="">
-    <div class="img-placeholder">
-      <div class="img-plus">+</div>
-      <div class="label" style="margin-top:4px;">Upload photo</div>
-    </div>
+    <div class="img-placeholder"><div class="img-plus">+</div><div class="label" style="margin-top:4px;">Upload photo</div></div>
   </div>
   <div class="masthead-center">
     <div class="masthead-sub">Fresh Meat</div>
@@ -192,17 +127,13 @@ footer .dot{display:inline-block;width:8px;height:8px;background:var(--lime);}
   <div class="masthead-img" onclick="document.getElementById('mh-upload2').click()">
     <input class="img-input" type="file" id="mh-upload2" accept="image/*" onchange="loadImg(this,'mh-img2',this.closest('.masthead-img'))">
     <img id="mh-img2" src="" alt="">
-    <div class="img-placeholder">
-      <div class="img-plus">+</div>
-      <div class="label" style="margin-top:4px;">Upload photo</div>
-    </div>
+    <div class="img-placeholder"><div class="img-plus">+</div><div class="label" style="margin-top:4px;">Upload photo</div></div>
   </div>
 </div>
 
-<!-- ══ FIRST THINGS FIRST ══ -->
+<!-- FIRST THINGS FIRST -->
 <div class="sec-head"><span>First things first</span></div>
 
-<!-- ══ AFRICA ══ -->
 <div class="content">
   <h2>I come from the land… in Africa</h2>
   <p>Don't be fooled by the twang — I'm definitely no laid back kiwi. The DNA doesn't lie.</p>
@@ -213,7 +144,6 @@ footer .dot{display:inline-block;width:8px;height:8px;background:var(--lime);}
   </div>
 </div>
 
-<!-- ══ BLUE ══ -->
 <div class="content" style="padding-top:0;">
   <h2>While we're here</h2>
   <p>I got Blue's DNA results tested too, but I think there was a mistake. This is what they said it was:</p>
@@ -230,24 +160,14 @@ footer .dot{display:inline-block;width:8px;height:8px;background:var(--lime);}
   </div>
 </div>
 
-<!-- ══ I NOT E ══ -->
+<!-- I NOT E -->
 <div class="banner"><div class="banner-text">I not E</div></div>
-<div class="banner-body">
-  A small little myth I'd like to bust — I'm no extrovert. Rather, I'm a proud introvert — ISTJ, to be clear.
-</div>
+<div class="banner-body">A small little myth I'd like to bust — I'm no extrovert. Rather, I'm a proud introvert — ISTJ, to be clear.</div>
 <div class="content" style="padding-top:0;">
-  <div class="two-images">
-    <div class="img-slot" onclick="document.getElementById('ti-upload1').click()">
-      <input class="img-input" type="file" id="ti-upload1" accept="image/*" onchange="loadImg(this,'ti-img1',this.closest('.img-slot'))">
-      <img id="ti-img1" src="" alt="">
-      <div class="img-placeholder">
-        <div class="img-plus">+</div>
-        <div class="label" style="margin-top:4px;">Upload image</div>
-      </div>
-    </div>
-    <div class="img-slot" onclick="document.getElementById('ti-upload2').click()">
-      <input class="img-input" type="file" id="ti-upload2" accept="image/*" onchange="loadImg(this,'ti-img2',this.closest('.img-slot'))">
-      <img id="ti-img2" src="" alt="">
+  <div class="single-image">
+    <div class="img-slot" onclick="document.getElementById('si-upload1').click()">
+      <input class="img-input" type="file" id="si-upload1" accept="image/*" onchange="loadImg(this,'si-img1',this.closest('.img-slot'))">
+      <img id="si-img1" src="" alt="">
       <div class="img-placeholder">
         <div class="img-plus">+</div>
         <div class="label" style="margin-top:4px;">Upload image</div>
@@ -256,7 +176,7 @@ footer .dot{display:inline-block;width:8px;height:8px;background:var(--lime);}
   </div>
 </div>
 
-<!-- ══ FAVOURITES ══ -->
+<!-- FAVOURITES -->
 <div class="banner"><div class="banner-text">Favourites</div></div>
 <div class="content">
   <div class="favs-grid">
@@ -286,7 +206,7 @@ footer .dot{display:inline-block;width:8px;height:8px;background:var(--lime);}
   </div>
 </div>
 
-<!-- ══ FAVOURITE THINGS ══ -->
+<!-- FAVOURITE THINGS -->
 <div class="banner"><div class="banner-text" style="font-size:1rem;letter-spacing:.05em;">A list of some of my favourite things</div></div>
 <div class="content" style="padding-top:1.5rem;padding-bottom:1.5rem;">
   <div class="fave-things">
@@ -299,7 +219,7 @@ footer .dot{display:inline-block;width:8px;height:8px;background:var(--lime);}
   </div>
 </div>
 
-<!-- ══ FUN FACTS ══ -->
+<!-- FUN FACTS -->
 <div class="banner"><div class="banner-text">Fun facts</div></div>
 <div class="content">
   <div class="facts-grid">
@@ -309,7 +229,7 @@ footer .dot{display:inline-block;width:8px;height:8px;background:var(--lime);}
     </div>
     <div class="fact-card">
       <div class="fact-num">02</div>
-      <div class="fact-text">My high school part time job was at a Christian bookstore — I'm very good at dealing with Karens and knowing the difference in Bible translations.</div>
+      <div class="fact-text">My high school part time job was at a Christian bookstore — very good at dealing with Karens and knowing the difference in Bible translations.</div>
     </div>
     <div class="fact-card">
       <div class="fact-num">03</div>
@@ -322,7 +242,7 @@ footer .dot{display:inline-block;width:8px;height:8px;background:var(--lime);}
   </div>
 </div>
 
-<!-- ══ THREE THINGS ══ -->
+<!-- THREE THINGS -->
 <div class="banner"><div class="banner-text">The three things I love the most</div></div>
 <div class="content">
   <div class="three-things">
@@ -336,15 +256,7 @@ footer .dot{display:inline-block;width:8px;height:8px;background:var(--lime);}
     </div>
     <div class="thing-card">
       <div class="thing-title">The Rules</div>
-      <div class="thing-body">
-        <ul>
-          <li>Justice</li>
-          <li>Efficiency</li>
-          <li>Structure</li>
-          <li>Routine</li>
-          <li>Objective approach to achieving success</li>
-        </ul>
-      </div>
+      <div class="thing-body"><ul><li>Justice</li><li>Efficiency</li><li>Structure</li><li>Routine</li><li>Objective approach to achieving success</li></ul></div>
     </div>
   </div>
   <div class="yt-grid">
@@ -363,7 +275,7 @@ footer .dot{display:inline-block;width:8px;height:8px;background:var(--lime);}
   </div>
 </div>
 
-<!-- ══ KPOP ══ -->
+<!-- KPOP -->
 <div class="sec-head"><span>An example of how the rules make everything better: Kpop</span></div>
 <div class="content">
   <p>Kpop isn't for fun. It's a business. It's not just 5, 6, 7, 8 — it's 10. Always.</p>
@@ -391,7 +303,7 @@ footer .dot{display:inline-block;width:8px;height:8px;background:var(--lime);}
   </div>
 </div>
 
-<!-- ══ CUP NOODLE MUSEUM ══ -->
+<!-- CUP NOODLE MUSEUM -->
 <div class="banner"><div class="banner-text">The cup noodle museum (Yokohama, Japan)</div></div>
 <div class="noodle-banner">
   <div class="noodle-emoji">🍜</div>
@@ -413,7 +325,7 @@ footer .dot{display:inline-block;width:8px;height:8px;background:var(--lime);}
   </div>
 </div>
 
-<!-- ══ FOOTER ══ -->
+<!-- FOOTER -->
 <footer>
   <div class="big">Hi.</div>
   <p class="sub"><span class="dot"></span>That's all. That's the website. ELR<span class="dot"></span></p>
