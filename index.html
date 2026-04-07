@@ -4,611 +4,432 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ELR</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --lime:#aaff00;
+  --black:#000000;
+  --white:#ffffff;
+  --gray:#c0c0c0;
+  --gray-light:#e8e8e8;
+  --gray-mid:#888888;
+  --gray-dark:#333333;
+  --text:#000000;
+  --mono:'DM Mono',monospace;
+  --serif:'Playfair Display',serif;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--white);color:var(--text);font-family:var(--mono);overflow-x:hidden;}
 
-  body {
-    background: #ffffff;
-    color: #000000;
-    font-family: 'DM Mono', monospace;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
+.label{font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gray-mid);}
 
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    padding: 3rem 2rem;
-    position: relative;
-    background: #ffffff;
-    overflow: hidden;
-  }
+/* ── MASTHEAD ── */
+.masthead{
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
+  align-items:center;
+  border-bottom:3px solid var(--black);
+  background:var(--white);
+}
+.masthead-img{
+  aspect-ratio:1;
+  max-height:220px;
+  background:#f0f0f0;
+  border-right:2px solid var(--black);
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:8px;cursor:pointer;
+  position:relative;overflow:hidden;transition:background .2s;
+}
+.masthead-img:last-child{border-right:none;border-left:2px solid var(--black);}
+.masthead-img:hover{background:#f5ffe0;}
+.masthead-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;}
+.masthead-img.has-image img{display:block;}
+.masthead-img.has-image .img-placeholder{display:none;}
+.img-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;}
+.img-plus{width:32px;height:32px;background:var(--lime);display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--black);}
+.img-input{display:none;}
 
-  .hero-deco { position: absolute; border-radius: 0; opacity: 0.28; }
-  .deco1 { width: 380px; height: 380px; background: #aaff00; top: -100px; left: -100px; transform: rotate(18deg); }
-  .deco2 { width: 240px; height: 240px; background: #c0c0c0; bottom: -40px; right: -60px; transform: rotate(12deg); }
-  .deco3 { width: 110px; height: 110px; background: #aaff00; top: 80px; right: 120px; transform: rotate(30deg); }
+.masthead-center{text-align:center;padding:2rem 2.5rem;}
+.masthead-sub{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gray-mid);margin-bottom:.5rem;}
+.masthead-title{font-family:var(--serif);font-size:clamp(4rem,12vw,7rem);font-weight:700;line-height:.9;color:var(--black);letter-spacing:-.02em;}
+.masthead-date{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gray-mid);margin-top:.75rem;}
 
-  .badge {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    background: #000000;
-    color: #aaff00;
-    padding: 5px 14px;
-    border-radius: 0;
-    display: inline-block;
-    margin-bottom: 2rem;
-  }
+/* ── SECTION HEADER ── */
+.sec-head{border-top:2px solid var(--black);border-bottom:1px solid var(--gray-light);padding:.6rem 2rem;display:flex;align-items:center;gap:1rem;background:var(--black);}
+.sec-head span{font-size:12px;letter-spacing:.25em;text-transform:uppercase;color:var(--lime);}
 
-  .hero h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(5rem, 20vw, 10rem);
-    font-weight: 700;
-    line-height: 0.9;
-    color: #000000;
-    letter-spacing: -0.02em;
-    margin-bottom: 1.5rem;
-  }
+/* ── BANNER ── */
+.banner{background:var(--lime);padding:1.2rem 2rem;display:flex;align-items:center;gap:1rem;}
+.banner-text{font-family:var(--serif);font-size:clamp(1.4rem,4vw,2.2rem);font-weight:700;color:var(--black);line-height:1.1;}
+.banner-body{font-size:13px;line-height:1.9;color:var(--black);padding:1.5rem 2rem;max-width:860px;margin:0 auto;}
 
-  .hero-tagline {
-    font-size: 13px;
-    letter-spacing: 0.06em;
-    color: #444444;
-    max-width: 340px;
-    line-height: 1.9;
-  }
+/* ── CONTENT ── */
+.content{padding:2.5rem 2rem;max-width:860px;margin:0 auto;}
+.content h2{font-family:var(--serif);font-size:1.6rem;font-weight:700;color:var(--black);margin-bottom:1rem;}
+.content p{font-size:13px;line-height:2;color:var(--black);margin-bottom:1rem;}
 
-  .scroll-hint {
-    position: absolute;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: #888888;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-  }
-  .scroll-line {
-    width: 1px;
-    height: 32px;
-    background: #aaff00;
-    animation: scrollpulse 1.6s ease-in-out infinite;
-  }
-  @keyframes scrollpulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+/* ── PLOTLY PLACEHOLDER ── */
+.plotly-slot{
+  border:2px dashed var(--gray-light);background:#fafafa;
+  min-height:260px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:10px;margin:1.5rem 0;
+}
+.plotly-slot .ps-icon{width:40px;height:40px;background:var(--lime);display:flex;align-items:center;justify-content:center;}
+.plotly-slot .ps-label{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gray-mid);}
+.plotly-slot .ps-note{font-size:11px;color:#bbb;margin-top:4px;}
 
-  section {
-    padding: 5rem 2rem;
-    max-width: 860px;
-    margin: 0 auto;
-  }
+/* ── TWO IMAGES ── */
+.two-images{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--gray-light);border:1px solid var(--gray-light);margin:1.5rem 0;}
+.two-images .img-slot{
+  aspect-ratio:4/3;background:#f8f8f8;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:8px;cursor:pointer;transition:background .2s;
+  position:relative;overflow:hidden;
+}
+.two-images .img-slot:hover{background:#f5ffe0;}
+.two-images .img-slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;}
+.two-images .img-slot.has-image img{display:block;}
+.two-images .img-slot.has-image .img-placeholder{display:none;}
 
-  .section-label {
-    font-size: 10px;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: #888888;
-    margin-bottom: 2.5rem;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .section-label::before {
-    content: '';
-    width: 10px;
-    height: 10px;
-    background: #aaff00;
-    flex-shrink: 0;
-  }
-  .section-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: #e0e0e0;
-  }
+/* ── FAVOURITES ── */
+.favs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--gray-light);}
+.fav-col{border-right:1px solid var(--gray-light);padding:1.5rem;}
+.fav-col:last-child{border-right:none;}
+.fav-col-head{font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--gray-mid);margin-bottom:1rem;padding-bottom:.6rem;border-bottom:2px solid var(--lime);}
+.fav-item{font-size:12px;color:var(--black);padding:.35rem 0;border-bottom:1px dashed var(--gray-light);line-height:1.5;}
+.fav-item:last-child{border-bottom:none;}
+.fav-item.italic{font-style:italic;color:var(--gray-mid);}
 
-  /* FACTS */
-  .facts-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1px;
-    background: #d8d8d8;
-    border: 1px solid #d8d8d8;
-    overflow: hidden;
-  }
-  .fact-card { background: #ffffff; padding: 2rem 1.75rem; }
-  .fact-num {
-    font-family: 'Playfair Display', serif;
-    font-size: 3rem;
-    font-weight: 700;
-    color: #aaff00;
-    line-height: 1;
-    margin-bottom: 0.5rem;
-  }
-  .fact-text { font-size: 13px; line-height: 1.8; color: #000000; }
+/* ── FAVE THINGS ── */
+.fave-things{border:1px solid var(--gray-light);overflow:hidden;margin:0;}
+.fave-row{display:flex;align-items:baseline;gap:1rem;padding:.85rem 1.5rem;border-bottom:1px solid var(--gray-light);font-size:13px;}
+.fave-row:last-child{border-bottom:none;}
+.fave-key{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--lime);min-width:180px;flex-shrink:0;}
+.fave-val{color:var(--black);line-height:1.6;}
 
-  /* HOBBIES */
-  .hobby-list { display: flex; flex-direction: column; border: 1px solid #d8d8d8; overflow: hidden; }
-  .hobby-row {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    padding: 1.5rem 2rem;
-    border-bottom: 1px solid #e8e8e8;
-    background: #ffffff;
-    transition: background 0.2s;
-  }
-  .hobby-row:last-child { border-bottom: none; }
-  .hobby-row:hover { background: #f5ffe0; }
-  .hobby-icon {
-    width: 40px; height: 40px;
-    background: #aaff00;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0; font-size: 18px;
-  }
-  .hobby-name {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem; font-style: italic; color: #000000;
-  }
-  .hobby-desc { font-size: 11px; color: #888888; letter-spacing: 0.05em; margin-left: auto; text-align: right; }
+/* ── FUN FACTS ── */
+.facts-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--gray-light);border:1px solid var(--gray-light);}
+.fact-card{background:var(--white);padding:1.75rem;}
+.fact-num{font-family:var(--serif);font-size:2.5rem;font-weight:700;color:var(--lime);line-height:1;margin-bottom:.5rem;}
+.fact-text{font-size:13px;line-height:1.9;color:var(--black);}
 
-  /* FAVOURITES */
-  .fav-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-  .fav-col-head {
-    font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase;
-    color: #888888; margin-bottom: 1.2rem; padding-bottom: 0.8rem;
-    border-bottom: 3px solid #aaff00;
-  }
-  .fav-item {
-    font-size: 13px; color: #000000;
-    padding: 0.4rem 0; line-height: 1.6;
-    border-bottom: 1px dashed #e8e8e8;
-  }
-  .fav-item:last-child { border-bottom: none; }
+/* ── THREE THINGS ── */
+.three-things{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--gray-light);border:1px solid var(--gray-light);}
+.thing-card{background:var(--white);padding:1.75rem;}
+.thing-title{font-family:var(--serif);font-size:1.2rem;font-style:italic;color:var(--black);margin-bottom:.75rem;padding-bottom:.75rem;border-bottom:2px solid var(--lime);}
+.thing-body{font-size:12px;line-height:1.9;color:var(--black);}
+.thing-body li{list-style:none;padding:.2rem 0;}
+.thing-body li::before{content:'— ';color:var(--lime);}
 
-  /* ISTJ */
-  .istj-wrap { border: 1px solid #d8d8d8; overflow: hidden; }
-  .istj-header {
-    background: #000000;
-    padding: 2rem 2.5rem;
-    display: flex;
-    align-items: baseline;
-    gap: 1.5rem;
-  }
-  .istj-type {
-    font-family: 'Playfair Display', serif;
-    font-size: 3.5rem;
-    font-weight: 700;
-    color: #aaff00;
-    line-height: 1;
-  }
-  .istj-full {
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: #c0c0c0;
-  }
-  .istj-body { padding: 2rem 2.5rem; background: #ffffff; }
-  .istj-traits {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1px;
-    background: #e8e8e8;
-    border: 1px solid #e8e8e8;
-    margin-bottom: 1.5rem;
-  }
-  .istj-trait { background: #ffffff; padding: 1rem 1.25rem; }
-  .istj-trait-label {
-    font-size: 9px;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: #aaff00;
-    margin-bottom: 4px;
-  }
-  .istj-trait-val { font-size: 13px; color: #000000; line-height: 1.6; }
-  .istj-desc {
-    font-size: 13px;
-    line-height: 2;
-    color: #000000;
-    border-left: 3px solid #aaff00;
-    padding-left: 1.25rem;
-  }
+/* ── YT SLOTS ── */
+.yt-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--gray-light);border:1px solid var(--gray-light);margin:1.5rem 0;}
+.yt-card{background:var(--white);display:flex;flex-direction:column;text-decoration:none;transition:background .2s;}
+.yt-card:hover{background:#f5ffe0;}
+.yt-thumb{aspect-ratio:16/9;background:#f0f0f0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;border-bottom:1px solid var(--gray-light);}
+.yt-play{width:34px;height:34px;background:var(--lime);display:flex;align-items:center;justify-content:center;}
+.yt-tri{width:0;height:0;border-top:7px solid transparent;border-bottom:7px solid transparent;border-left:13px solid var(--black);margin-left:3px;}
+.yt-thumb-lbl{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#bbb;}
+.yt-info{padding:.85rem 1rem;}
+.yt-title{font-family:var(--serif);font-size:.85rem;font-style:italic;color:var(--black);margin-bottom:3px;line-height:1.4;}
+.yt-url{font-size:10px;color:#bbb;word-break:break-all;}
 
-  /* YOUTUBE */
-  .yt-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: #d8d8d8;
-    border: 1px solid #d8d8d8;
-    overflow: hidden;
-  }
-  .yt-card {
-    background: #ffffff;
-    display: flex;
-    flex-direction: column;
-    text-decoration: none;
-    transition: background 0.2s;
-  }
-  .yt-card:hover { background: #f5ffe0; }
-  .yt-thumb {
-    width: 100%;
-    aspect-ratio: 16/9;
-    background: #f0f0f0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    border-bottom: 1px solid #e8e8e8;
-  }
-  .yt-play {
-    width: 36px; height: 36px;
-    background: #aaff00;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .yt-play-tri {
-    width: 0; height: 0;
-    border-top: 8px solid transparent;
-    border-bottom: 8px solid transparent;
-    border-left: 14px solid #000000;
-    margin-left: 3px;
-  }
-  .yt-thumb-label {
-    font-size: 9px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: #bbbbbb;
-  }
-  .yt-info { padding: 1rem 1.25rem; }
-  .yt-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 0.9rem;
-    font-style: italic;
-    color: #000000;
-    margin-bottom: 4px;
-    line-height: 1.4;
-  }
-  .yt-url { font-size: 10px; color: #bbbbbb; letter-spacing: 0.05em; word-break: break-all; }
+/* ── KPOP RULES ── */
+.kpop-rules{border:1px solid var(--gray-light);overflow:hidden;margin:1.5rem 0;}
+.kpop-rule{display:flex;gap:1.5rem;padding:1rem 1.5rem;border-bottom:1px solid var(--gray-light);align-items:flex-start;}
+.kpop-rule:last-child{border-bottom:none;}
+.kpop-rule:hover{background:#f5ffe0;}
+.kpop-n{font-family:var(--serif);font-size:1.6rem;font-weight:700;color:var(--lime);min-width:36px;line-height:1;}
+.kpop-text{font-size:13px;line-height:1.8;color:var(--black);}
 
-  /* IMAGES */
-  .img-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1px;
-    background: #d8d8d8;
-    border: 1px solid #d8d8d8;
-    overflow: hidden;
-  }
-  .img-slot {
-    background: #f8f8f8;
-    aspect-ratio: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    cursor: pointer;
-    transition: background 0.2s;
-    position: relative;
-    overflow: hidden;
-  }
-  .img-slot:hover { background: #f0ffe0; }
-  .img-slot img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: none;
-  }
-  .img-slot.has-image img { display: block; }
-  .img-slot.has-image .img-placeholder { display: none; }
-  .img-placeholder {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-  }
-  .img-plus {
-    width: 36px; height: 36px;
-    background: #aaff00;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 22px;
-    color: #000000;
-    font-weight: 300;
-    line-height: 1;
-  }
-  .img-label {
-    font-size: 9px;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: #bbbbbb;
-  }
-  .img-input { display: none; }
+/* ── NOODLE ── */
+.noodle-banner{background:var(--black);padding:3rem 2rem;display:flex;align-items:center;gap:3rem;position:relative;overflow:hidden;}
+.noodle-banner::before{content:'';position:absolute;width:200px;height:200px;background:var(--lime);opacity:.07;right:-40px;top:-40px;transform:rotate(20deg);}
+.noodle-emoji{font-size:clamp(3rem,8vw,5rem);flex-shrink:0;}
+.noodle-title{font-family:var(--serif);font-size:1.6rem;font-style:italic;color:var(--white);margin-bottom:.4rem;}
+.noodle-sub{font-size:12px;letter-spacing:.15em;text-transform:uppercase;color:var(--gray);}
+.noodle-list{border:1px solid var(--gray-light);overflow:hidden;margin:1.5rem 0;}
+.noodle-item{display:flex;gap:1.5rem;padding:1rem 1.5rem;border-bottom:1px solid var(--gray-light);align-items:flex-start;}
+.noodle-item:last-child{border-bottom:none;}
+.noodle-dot{width:10px;height:10px;background:var(--lime);flex-shrink:0;margin-top:5px;}
+.noodle-text{font-size:13px;line-height:1.8;color:var(--black);}
 
-  /* TRAVEL */
-  .travel-card {
-    background: #000000;
-    color: #ffffff;
-    padding: 3rem 2.5rem;
-    display: flex;
-    align-items: center;
-    gap: 3rem;
-    position: relative;
-    overflow: hidden;
-  }
-  .travel-card::before {
-    content: '';
-    position: absolute;
-    width: 180px; height: 180px;
-    background: #aaff00;
-    opacity: 0.08;
-    right: -40px; top: -40px;
-    transform: rotate(20deg);
-  }
-  .travel-big { font-size: clamp(3rem, 8vw, 5rem); line-height: 1; flex-shrink: 0; }
-  .travel-place {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.4rem; font-style: italic;
-    color: #ffffff; margin-bottom: 0.5rem;
-  }
-  .travel-text { font-size: 13px; line-height: 2; color: #c0c0c0; }
+/* ── FOOTER ── */
+footer{text-align:center;padding:4rem 2rem;border-top:4px solid var(--lime);}
+footer .big{font-family:var(--serif);font-size:clamp(3rem,10vw,6rem);font-weight:700;font-style:italic;color:var(--black);}
+footer .sub{font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--gray-mid);margin-top:1rem;display:flex;align-items:center;justify-content:center;gap:10px;}
+footer .dot{display:inline-block;width:8px;height:8px;background:var(--lime);}
 
-  /* FOOTER */
-  footer {
-    text-align: center;
-    padding: 4rem 2rem;
-    border-top: 4px solid #aaff00;
-    background: #ffffff;
-  }
-  footer .big-hi {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(3rem, 10vw, 6rem);
-    font-weight: 700; font-style: italic; color: #000000;
-  }
-  footer .sub {
-    font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
-    color: #888888; margin-top: 1rem;
-    display: flex; align-items: center; justify-content: center; gap: 10px;
-  }
-  footer .dot { display: inline-block; width: 8px; height: 8px; background: #aaff00; }
-
-  @media (max-width: 600px) {
-    .facts-grid, .yt-grid, .img-grid { grid-template-columns: 1fr; }
-    .fav-cols { grid-template-columns: 1fr; }
-    .travel-card { flex-direction: column; gap: 1.5rem; }
-    .hobby-desc { display: none; }
-    .istj-traits { grid-template-columns: 1fr; }
-  }
+@media(max-width:640px){
+  .masthead{grid-template-columns:1fr;}
+  .masthead-img{max-height:160px;}
+  .masthead-img:last-child{border-left:none;border-top:2px solid var(--black);}
+  .favs-grid,.three-things,.facts-grid,.yt-grid{grid-template-columns:1fr;}
+  .fav-col{border-right:none;border-bottom:1px solid var(--gray-light);}
+  .noodle-banner{flex-direction:column;gap:1.5rem;}
+  .two-images{grid-template-columns:1fr;}
+  .fave-key{min-width:120px;}
+}
 </style>
 </head>
 <body>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-deco deco1"></div>
-  <div class="hero-deco deco2"></div>
-  <div class="hero-deco deco3"></div>
-  <div class="badge">Definitely South African</div>
-  <h1>ELR</h1>
-  <p class="hero-tagline">Not extroverted. Here to say hi. Knows where the clues are.</p>
-  <div class="scroll-hint">
-    <span>scroll</span>
-    <div class="scroll-line"></div>
+<!-- ══ MASTHEAD ══ -->
+<div class="masthead">
+  <div class="masthead-img" onclick="document.getElementById('mh-upload1').click()">
+    <input class="img-input" type="file" id="mh-upload1" accept="image/*" onchange="loadImg(this,'mh-img1',this.closest('.masthead-img'))">
+    <img id="mh-img1" src="" alt="">
+    <div class="img-placeholder">
+      <div class="img-plus">+</div>
+      <div class="label" style="margin-top:4px;">Upload photo</div>
+    </div>
+  </div>
+  <div class="masthead-center">
+    <div class="masthead-sub">Fresh Meat</div>
+    <div class="masthead-title">ELR</div>
+    <div class="masthead-date">Wed 1 April 2026</div>
+  </div>
+  <div class="masthead-img" onclick="document.getElementById('mh-upload2').click()">
+    <input class="img-input" type="file" id="mh-upload2" accept="image/*" onchange="loadImg(this,'mh-img2',this.closest('.masthead-img'))">
+    <img id="mh-img2" src="" alt="">
+    <div class="img-placeholder">
+      <div class="img-plus">+</div>
+      <div class="label" style="margin-top:4px;">Upload photo</div>
+    </div>
   </div>
 </div>
 
-<!-- FUN FACTS -->
-<section>
-  <div class="section-label">Fun facts</div>
+<!-- ══ FIRST THINGS FIRST ══ -->
+<div class="sec-head"><span>First things first</span></div>
+
+<!-- ══ AFRICA ══ -->
+<div class="content">
+  <h2>I come from the land… in Africa</h2>
+  <p>Don't be fooled by the twang — I'm definitely no laid back kiwi. The DNA doesn't lie.</p>
+  <div class="plotly-slot">
+    <div class="ps-icon">📊</div>
+    <div class="ps-label">Plotly chart — paste embed code here</div>
+    <div class="ps-note">Replace this div with your Plotly HTML embed</div>
+  </div>
+</div>
+
+<!-- ══ BLUE ══ -->
+<div class="content" style="padding-top:0;">
+  <h2>While we're here</h2>
+  <p>I got Blue's DNA results tested too, but I think there was a mistake. This is what they said it was:</p>
+  <div class="plotly-slot">
+    <div class="ps-icon">🐶</div>
+    <div class="ps-label">Plotly chart — Blue's official results</div>
+    <div class="ps-note">Replace this div with your Plotly HTML embed</div>
+  </div>
+  <p style="margin-top:1.5rem;">But this is what I think it actually is:</p>
+  <div class="plotly-slot">
+    <div class="ps-icon">🐾</div>
+    <div class="ps-label">Plotly chart — Blue's actual results (ELR's version)</div>
+    <div class="ps-note">Replace this div with your Plotly HTML embed</div>
+  </div>
+</div>
+
+<!-- ══ I NOT E ══ -->
+<div class="banner"><div class="banner-text">I not E</div></div>
+<div class="banner-body">
+  A small little myth I'd like to bust — I'm no extrovert. Rather, I'm a proud introvert — ISTJ, to be clear.
+</div>
+<div class="content" style="padding-top:0;">
+  <div class="two-images">
+    <div class="img-slot" onclick="document.getElementById('ti-upload1').click()">
+      <input class="img-input" type="file" id="ti-upload1" accept="image/*" onchange="loadImg(this,'ti-img1',this.closest('.img-slot'))">
+      <img id="ti-img1" src="" alt="">
+      <div class="img-placeholder">
+        <div class="img-plus">+</div>
+        <div class="label" style="margin-top:4px;">Upload image</div>
+      </div>
+    </div>
+    <div class="img-slot" onclick="document.getElementById('ti-upload2').click()">
+      <input class="img-input" type="file" id="ti-upload2" accept="image/*" onchange="loadImg(this,'ti-img2',this.closest('.img-slot'))">
+      <img id="ti-img2" src="" alt="">
+      <div class="img-placeholder">
+        <div class="img-plus">+</div>
+        <div class="label" style="margin-top:4px;">Upload image</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FAVOURITES ══ -->
+<div class="banner"><div class="banner-text">Favourites</div></div>
+<div class="content">
+  <div class="favs-grid">
+    <div class="fav-col">
+      <div class="fav-col-head">Tunes</div>
+      <div class="fav-item">Enya</div>
+      <div class="fav-item">No Doubt</div>
+      <div class="fav-item">John Farnham's 'You're the Voice'</div>
+      <div class="fav-item italic">Playlists:</div>
+      <div class="fav-item">90s Club Essentials</div>
+      <div class="fav-item">100 Hard Dance Hits 2013</div>
+    </div>
+    <div class="fav-col">
+      <div class="fav-col-head">Screentime</div>
+      <div class="fav-item">Midsomer Murders (for the 3rd time)</div>
+      <div class="fav-item">Twin Peaks</div>
+      <div class="fav-item">The start of a movie, then googling the ending, then giving up</div>
+    </div>
+    <div class="fav-col">
+      <div class="fav-col-head">Podcasts</div>
+      <div class="fav-item">Hard Fork</div>
+      <div class="fav-item">The World Today</div>
+      <div class="fav-item">The Economy Stupid</div>
+      <div class="fav-item">Commbank View</div>
+      <div class="fav-item italic">Saying "I listened to that on a podcast" a lot</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FAVOURITE THINGS ══ -->
+<div class="banner"><div class="banner-text" style="font-size:1rem;letter-spacing:.05em;">A list of some of my favourite things</div></div>
+<div class="content" style="padding-top:1.5rem;padding-bottom:1.5rem;">
+  <div class="fave-things">
+    <div class="fave-row"><span class="fave-key">Dog</span><span class="fave-val">Blue</span></div>
+    <div class="fave-row"><span class="fave-key">Cat</span><span class="fave-val">The one I will have, one day</span></div>
+    <div class="fave-row"><span class="fave-key">RBA publication</span><span class="fave-val">Statement of Monetary Policy</span></div>
+    <div class="fave-row"><span class="fave-key">Poem</span><span class="fave-val">Hope is the thing with feathers — Emily Dickinson</span></div>
+    <div class="fave-row"><span class="fave-key">Door</span><span class="fave-val">Revolving</span></div>
+    <div class="fave-row"><span class="fave-key">Big four bank economist</span><span class="fave-val">Adam Boyton</span></div>
+  </div>
+</div>
+
+<!-- ══ FUN FACTS ══ -->
+<div class="banner"><div class="banner-text">Fun facts</div></div>
+<div class="content">
   <div class="facts-grid">
     <div class="fact-card">
       <div class="fact-num">01</div>
-      <div class="fact-text">Has been on first dates. Plural. The data collection continues.</div>
+      <div class="fact-text">I have a rare birthmark on my hand that grows back.</div>
     </div>
     <div class="fact-card">
       <div class="fact-num">02</div>
-      <div class="fact-text">The birthmark grows back. Every time. Make of that what you will.</div>
+      <div class="fact-text">My high school part time job was at a Christian bookstore — I'm very good at dealing with Karens and knowing the difference in Bible translations.</div>
     </div>
-    <div class="fact-card" style="grid-column: 1 / -1; border-top: 1px solid #d8d8d8;">
+    <div class="fact-card">
       <div class="fact-num">03</div>
-      <div class="fact-text">Keeps a mental file on everyone she's ever met. Organised by suspicion level.</div>
+      <div class="fact-text">I was on First Dates.</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-num">04</div>
+      <div class="fact-text">I once watched so much Korean content Google assumed it was my native language.</div>
     </div>
   </div>
-</section>
+</div>
 
-<!-- HOBBIES -->
-<section style="padding-top: 0;">
-  <div class="section-label">Things I do</div>
-  <div class="hobby-list">
-    <div class="hobby-row">
-      <div class="hobby-icon">🔍</div>
-      <div class="hobby-name">Being Nancy Drew</div>
-      <div class="hobby-desc">amateur sleuth &amp; enjoyer of clues</div>
+<!-- ══ THREE THINGS ══ -->
+<div class="banner"><div class="banner-text">The three things I love the most</div></div>
+<div class="content">
+  <div class="three-things">
+    <div class="thing-card">
+      <div class="thing-title">Being Nancy Drew</div>
+      <div class="thing-body">On the case and solving problems, preferably with numbers!</div>
     </div>
-    <div class="hobby-row">
-      <div class="hobby-icon">💃</div>
-      <div class="hobby-name">Dancing</div>
-      <div class="hobby-desc">in living rooms, mostly</div>
+    <div class="thing-card">
+      <div class="thing-title">Dancing</div>
+      <div class="thing-body">Watching, doing, watching (again) — see below for my favourites.</div>
     </div>
-    <div class="hobby-row">
-      <div class="hobby-icon">📋</div>
-      <div class="hobby-name">The rules</div>
-      <div class="hobby-desc">knows them, possibly enforces them</div>
-    </div>
-  </div>
-</section>
-
-<!-- FAVOURITES -->
-<section style="padding-top: 0;">
-  <div class="section-label">A few favourites</div>
-  <div class="fav-cols">
-    <div>
-      <div class="fav-col-head">Music</div>
-      <div class="fav-item">Enya</div>
-      <div class="fav-item">Robyn</div>
-      <div class="fav-item">No Doubt</div>
-    </div>
-    <div>
-      <div class="fav-col-head">Screen</div>
-      <div class="fav-item">The Virgin Suicides</div>
-      <div class="fav-item">Midsomer Murders</div>
-      <div class="fav-item">Twin Peaks</div>
-      <div class="fav-item">Parks &amp; Rec</div>
-    </div>
-    <div>
-      <div class="fav-col-head">Reading</div>
-      <div class="fav-item">Emily Dickinson poems</div>
-      <div class="fav-item" style="color: #888888; font-style: italic;">Because I could not stop for death...</div>
-    </div>
-  </div>
-</section>
-
-<!-- PERSONALITY -->
-<section style="padding-top: 0;">
-  <div class="section-label">Personality</div>
-  <div class="istj-wrap">
-    <div class="istj-header">
-      <div class="istj-type">ISTJ</div>
-      <div class="istj-full">Introverted · Sensing · Thinking · Judging</div>
-    </div>
-    <div class="istj-body">
-      <div class="istj-traits">
-        <div class="istj-trait">
-          <div class="istj-trait-label">Also known as</div>
-          <div class="istj-trait-val">The Inspector</div>
-        </div>
-        <div class="istj-trait">
-          <div class="istj-trait-label">Core drive</div>
-          <div class="istj-trait-val">Order, accuracy, reliability</div>
-        </div>
-        <div class="istj-trait">
-          <div class="istj-trait-label">Strengths</div>
-          <div class="istj-trait-val">Dependable, thorough, observant</div>
-        </div>
-        <div class="istj-trait">
-          <div class="istj-trait-label">Recharges by</div>
-          <div class="istj-trait-val">Solitude, routines, a good plan</div>
-        </div>
-      </div>
-      <div class="istj-desc">
-        Quietly competent and privately opinionated. Follows through on everything, notices everything, says little. Prefers one good friend to a room full of acquaintances. Has strong feelings about how things should be done — and is usually right about it.
+    <div class="thing-card">
+      <div class="thing-title">The Rules</div>
+      <div class="thing-body">
+        <ul>
+          <li>Justice</li>
+          <li>Efficiency</li>
+          <li>Structure</li>
+          <li>Routine</li>
+          <li>Objective approach to achieving success</li>
+        </ul>
       </div>
     </div>
   </div>
-</section>
-
-<!-- YOUTUBE -->
-<section style="padding-top: 0;">
-  <div class="section-label">Videos of interest</div>
   <div class="yt-grid">
-    <a class="yt-card" href="YOUR_YOUTUBE_URL_1" target="_blank">
-      <div class="yt-thumb">
-        <div class="yt-play"><div class="yt-play-tri"></div></div>
-        <div class="yt-thumb-label">Add video URL</div>
-      </div>
-      <div class="yt-info">
-        <div class="yt-title">Video title here</div>
-        <div class="yt-url">youtube.com/watch?v=...</div>
-      </div>
+    <a class="yt-card" href="YOUR_DANCING_URL_1" target="_blank">
+      <div class="yt-thumb"><div class="yt-play"><div class="yt-tri"></div></div><div class="yt-thumb-lbl">Add video URL</div></div>
+      <div class="yt-info"><div class="yt-title">Video title here</div><div class="yt-url">youtube.com/watch?v=...</div></div>
     </a>
-    <a class="yt-card" href="YOUR_YOUTUBE_URL_2" target="_blank">
-      <div class="yt-thumb">
-        <div class="yt-play"><div class="yt-play-tri"></div></div>
-        <div class="yt-thumb-label">Add video URL</div>
-      </div>
-      <div class="yt-info">
-        <div class="yt-title">Video title here</div>
-        <div class="yt-url">youtube.com/watch?v=...</div>
-      </div>
+    <a class="yt-card" href="YOUR_DANCING_URL_2" target="_blank">
+      <div class="yt-thumb"><div class="yt-play"><div class="yt-tri"></div></div><div class="yt-thumb-lbl">Add video URL</div></div>
+      <div class="yt-info"><div class="yt-title">Video title here</div><div class="yt-url">youtube.com/watch?v=...</div></div>
     </a>
-    <a class="yt-card" href="YOUR_YOUTUBE_URL_3" target="_blank">
-      <div class="yt-thumb">
-        <div class="yt-play"><div class="yt-play-tri"></div></div>
-        <div class="yt-thumb-label">Add video URL</div>
-      </div>
-      <div class="yt-info">
-        <div class="yt-title">Video title here</div>
-        <div class="yt-url">youtube.com/watch?v=...</div>
-      </div>
+    <a class="yt-card" href="YOUR_DANCING_URL_3" target="_blank">
+      <div class="yt-thumb"><div class="yt-play"><div class="yt-tri"></div></div><div class="yt-thumb-lbl">Add video URL</div></div>
+      <div class="yt-info"><div class="yt-title">Video title here</div><div class="yt-url">youtube.com/watch?v=...</div></div>
     </a>
   </div>
-</section>
+</div>
 
-<!-- IMAGES -->
-<section style="padding-top: 0;">
-  <div class="section-label">Photos</div>
-  <div class="img-grid">
-    <div class="img-slot" onclick="document.getElementById('upload1').click()">
-      <input class="img-input" type="file" id="upload1" accept="image/*" onchange="loadImage(this,'slot1')">
-      <img id="slot1" src="" alt="">
-      <div class="img-placeholder">
-        <div class="img-plus">+</div>
-        <div class="img-label">Upload image</div>
-      </div>
-    </div>
-    <div class="img-slot" onclick="document.getElementById('upload2').click()">
-      <input class="img-input" type="file" id="upload2" accept="image/*" onchange="loadImage(this,'slot2')">
-      <img id="slot2" src="" alt="">
-      <div class="img-placeholder">
-        <div class="img-plus">+</div>
-        <div class="img-label">Upload image</div>
-      </div>
-    </div>
-    <div class="img-slot" onclick="document.getElementById('upload3').click()">
-      <input class="img-input" type="file" id="upload3" accept="image/*" onchange="loadImage(this,'slot3')">
-      <img id="slot3" src="" alt="">
-      <div class="img-placeholder">
-        <div class="img-plus">+</div>
-        <div class="img-label">Upload image</div>
-      </div>
-    </div>
+<!-- ══ KPOP ══ -->
+<div class="sec-head"><span>An example of how the rules make everything better: Kpop</span></div>
+<div class="content">
+  <p>Kpop isn't for fun. It's a business. It's not just 5, 6, 7, 8 — it's 10. Always.</p>
+  <p>Collectivist culture combined with a tacit agreement to 'the rules' creates an enjoyable climate of content that thrives on structure.</p>
+  <div class="kpop-rules">
+    <div class="kpop-rule"><div class="kpop-n">1</div><div class="kpop-text">The training system ensures participants ("idols") meet set standards — you can trust they'll be qualified for the job.</div></div>
+    <div class="kpop-rule"><div class="kpop-n">2</div><div class="kpop-text">Groups are built in planned structures — deliberate roles and responsibilities means expectations are clear for both participants and viewers.</div></div>
+    <div class="kpop-rule"><div class="kpop-n">3</div><div class="kpop-text">We all know what success looks like — agreed scoring systems mean clear and equal markers for success and achievement.</div></div>
+    <div class="kpop-rule"><div class="kpop-n">4</div><div class="kpop-text">Merit is awarded by discipline — hard work is part of the job.</div></div>
   </div>
-</section>
-
-<!-- TRAVEL -->
-<section style="padding-top: 0;">
-  <div class="section-label">Places</div>
-  <div class="travel-card">
-    <div class="travel-big">🍜</div>
-    <div>
-      <div class="travel-place">Cup Noodle Museum</div>
-      <div class="travel-text">Dream destination. A whole museum dedicated to instant noodles. Aspirational. Correct.</div>
-    </div>
+  <p style="margin-top:1.5rem;">The result — well, it's not all bad. With a foundation of discipline, clear responsibilities and defined rules and roles, excellence becomes the standard, and everything above it an extension of that. Check below for my favourite kpop bops.</p>
+  <div class="yt-grid">
+    <a class="yt-card" href="YOUR_KPOP_URL_1" target="_blank">
+      <div class="yt-thumb"><div class="yt-play"><div class="yt-tri"></div></div><div class="yt-thumb-lbl">Add video URL</div></div>
+      <div class="yt-info"><div class="yt-title">Kpop bop here</div><div class="yt-url">youtube.com/watch?v=...</div></div>
+    </a>
+    <a class="yt-card" href="YOUR_KPOP_URL_2" target="_blank">
+      <div class="yt-thumb"><div class="yt-play"><div class="yt-tri"></div></div><div class="yt-thumb-lbl">Add video URL</div></div>
+      <div class="yt-info"><div class="yt-title">Kpop bop here</div><div class="yt-url">youtube.com/watch?v=...</div></div>
+    </a>
+    <a class="yt-card" href="YOUR_KPOP_URL_3" target="_blank">
+      <div class="yt-thumb"><div class="yt-play"><div class="yt-tri"></div></div><div class="yt-thumb-lbl">Add video URL</div></div>
+      <div class="yt-info"><div class="yt-title">Kpop bop here</div><div class="yt-url">youtube.com/watch?v=...</div></div>
+    </a>
   </div>
-</section>
+</div>
 
-<!-- FOOTER -->
+<!-- ══ CUP NOODLE MUSEUM ══ -->
+<div class="banner"><div class="banner-text">The cup noodle museum (Yokohama, Japan)</div></div>
+<div class="noodle-banner">
+  <div class="noodle-emoji">🍜</div>
+  <div>
+    <div class="noodle-title">One of my greatest life experiences.</div>
+    <div class="noodle-sub">Finally.</div>
+  </div>
+</div>
+<div class="content">
+  <h2>What's it about?</h2>
+  <p>Momofuku Ando, the inventor of cup noodles. But it's more than that…</p>
+  <p>The museum tells his story — and the story of other inventors, showing how:</p>
+  <div class="noodle-list">
+    <div class="noodle-item"><div class="noodle-dot"></div><div class="noodle-text">His diligence in solving a problem created the cup noodles we know and love.</div></div>
+    <div class="noodle-item"><div class="noodle-dot"></div><div class="noodle-text">The noodles were created with five objectives, which we still see now: taste, non-perishable, quick, cheap, sanitary.</div></div>
+    <div class="noodle-item"><div class="noodle-dot"></div><div class="noodle-text">He turned things upside down — literally — and created the opportunity for mass production.</div></div>
+    <div class="noodle-item"><div class="noodle-dot"></div><div class="noodle-text">He ensured justice by founding the Instant Food Industry Association to set fair competition and standards.</div></div>
+    <div class="noodle-item"><div class="noodle-dot"></div><div class="noodle-text">The museum doesn't just demonstrate the importance of the invention but that big problems can be solved with simple solutions — as long as you have the diligence to find it.</div></div>
+  </div>
+</div>
+
+<!-- ══ FOOTER ══ -->
 <footer>
-  <div class="big-hi">Hi.</div>
+  <div class="big">Hi.</div>
   <p class="sub"><span class="dot"></span>That's all. That's the website. ELR<span class="dot"></span></p>
 </footer>
 
 <script>
-function loadImage(input, imgId) {
+function loadImg(input, imgId, slot) {
   const file = input.files[0];
   if (!file) return;
   const reader = new FileReader();
-  reader.onload = function(e) {
-    const img = document.getElementById(imgId);
-    img.src = e.target.result;
-    img.parentElement.classList.add('has-image');
+  reader.onload = e => {
+    document.getElementById(imgId).src = e.target.result;
+    slot.classList.add('has-image');
   };
   reader.readAsDataURL(file);
 }
 </script>
-
 </body>
 </html>
